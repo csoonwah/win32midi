@@ -1,5 +1,5 @@
 # $Id: lullaby.py 30 2007-01-28 17:12:07Z csw $
-# Copyright 2004-2006 Soon Wah Chua
+# Copyright 2004-2018 Soon Wah Chua
     
 import player
 

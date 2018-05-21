@@ -1,3 +1,4 @@
+# Copyright 2004-2018 Soon Wah Chua
 from win32midi2 import *
 import time
 print 'Num of Input/Output Devices',midiInGetNumDevs(),'/',midiOutGetNumDevs()
@@ -47,10 +48,10 @@ hdr.lpData = b
 hdr.dwBufferLength = 3
 hdr.dwRecordedLength = 0
 hdr.dwFlags = 0
-midiOutPrepareHeader(Stream2MIDI(stout[1]),hdr)
+midiOutPrepareHeader(stout[1],hdr)
 print 'Sending long stream message'
 print midiStreamOut(stout[1],hdr)
-print midiOutUnprepareHeader(Stream2MIDI(stout[1]),hdr)
+print midiOutUnprepareHeader(stout[1],hdr)
 time.sleep(2)
 result = midiStreamClose(stout[1])
 print midiOutGetErrorTextA(result)

@@ -1,13 +1,14 @@
 # A simple Python class to provide some high level MIDI APIs to play MIDI
 # $Id: player.py 30 2007-01-28 17:12:07Z csw $
-# Copyright 2004 Soon Wah Chua
+# Copyright 2004-2018 Soon Wah Chua
 
 import sys
 from timing import waitTime
 if sys.winver >= '2.7':
     from win32midi2 import *
 else:
-    from win32midi import *
+    print "Python version not supported"
+    exit(1)
 import time,thread
 import cPickle
 
@@ -177,4 +178,4 @@ class Player:
             thread.start_new(self.playAllChord,chordStructs[i])
         time.sleep(1)
         while (COUNTS>0):
-            time.sleep(10)
+            time.sleep(2)
