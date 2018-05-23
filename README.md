@@ -15,48 +15,48 @@ Check out the file win32midiTest.py to find out how the module could be used. Do
 
 ## Features
 The win32midi module provides wrappers to call Win32 MIDI APIs. The following APIs are available.
-midiInOpen
-midiInPrepareHeader
-midiInClose
-midiInGetDevCaps
-midiInGetErrorText
-midiInGetID
-midiInGetNumDevs
-midiInUnprepareHeader
-midiOutClose
-midiOutGetDevCaps
-midiOutGetErrorText
-midiOutGetID
-midiOutGetNumDevs
-midiOutGetVolume
-midiOutLongMsg
-midiOutOpen
-midiOutPrepareHeader
-midiOutReset
-midiOutSetVolume
-midiOutShortMsg
-midiOutUnprepareHeader
+- midiInOpen
+- midiInPrepareHeader
+- midiInClose
+- midiInGetDevCaps
+- midiInGetErrorText
+- midiInGetID
+- midiInGetNumDevs
+- midiInUnprepareHeader
+- midiOutClose
+- midiOutGetDevCaps
+- midiOutGetErrorText
+- midiOutGetID
+- midiOutGetNumDevs
+- midiOutGetVolume
+- midiOutLongMsg
+- midiOutOpen
+- midiOutPrepareHeader
+- midiOutReset
+- midiOutSetVolume
+- midiOutShortMsg
+- midiOutUnprepareHeader
 
 The following APIs are either incomplete or not yet tested to be working properly.
-midiConnect
-midiDisconnect
-midiInAddBuffer
-midiInMessage
-midiInProc
-midiInReset
-midiInStart
-midiInStop
-midiOutCacheDrumPatches
-midiOutCachePatches
-midiOutMessage
-midiStreamClose
-midiStreamOpen
-midiStreamOut
-midiStreamPause
-midiStreamPosition
-midiStreamProperty
-midiStreamRestart
-midiStreamStop
+- midiConnect
+- midiDisconnect
+- midiInAddBuffer
+- midiInMessage
+- midiInProc
+- midiInReset
+- midiInStart
+- midiInStop
+- midiOutCacheDrumPatches
+- midiOutCachePatches
+- midiOutMessage
+- midiStreamClose
+- midiStreamOpen
+- midiStreamOut
+- midiStreamPause
+- midiStreamPosition
+- midiStreamProperty
+- midiStreamRestart
+- midiStreamStop
 As the documentation is still being written, please refer to the test programs to get a glimpse of how to use the module.
 
 Copyright S. W. Chua, 2004-2018, All rights reserved
