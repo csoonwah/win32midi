@@ -1,0 +1,1338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>How to use the win32midi package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="howto.tex"> 
+<meta name="date" content="2018-05-23 23:10:00"> 
+<link rel="stylesheet" type="text/css" href="howto.css"> 
+</head><body 
+>
+<div class="maketitle"> _____________________________________________________________________________________________________________________________________________________________________________________
+                                                                                      <div class="flushright" 
+>
+ <h2 class="titleHead">How to use the win32midi package</h2>
+<span 
+class="phvro7t-x-x-120">Release 0.2</span>
+<div class="author" ><span 
+class="phvr7t-x-x-144">Soon Wah Chua</span></div>
+<div class="date" >May 23, 2018</div>
+</div>
+</div>
+<div 
+class="abstract" 
+>
+<div class="center" 
+>
+<!--l. 37--><p class="noindent" >
+<!--l. 37--><p class="noindent" ><span 
+class="ptmb7t-x-x-90">Abstract</span></div>
+     <!--l. 38--><p class="noindent" ><span 
+class="ptmr7t-x-x-90">This document describes how to use the win32midi package. It also describes the </span><span 
+class="pcrr7t-x-x-90">player </span><span 
+class="ptmr7t-x-x-90">that is part of the</span>
+     <span 
+class="ptmr7t-x-x-90">package. This is a work in progress.</span>
+</div>
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Contents</h3>
+<div class="tableofcontents">
+<span class="sectionToc" >1 <a 
+href="#x1-20001" id="QQ2-1-2">What is win32midi package?</a></span>
+<br /><span class="sectionToc" >2 <a 
+href="#x1-30002" id="QQ2-1-3">Software Requirements</a></span>
+<br /><span class="sectionToc" >3 <a 
+href="#x1-40003" id="QQ2-1-4"><span 
+class="pcrr7t-">win32midi </span>&#8212; Python wrapper functions for Win32 MIDI APIs</a></span>
+<br /><span class="sectionToc" >4 <a 
+href="#x1-50004" id="QQ2-1-5"><span 
+class="pcrr7t-">player </span>&#8212; High level functions for playing music via the Win32 MIDI APIs</a></span>
+<br />&#x00A0;<span class="subsectionToc" >4.1 <a 
+href="#x1-60004.1" id="QQ2-1-6">Example </a></span>
+</div>
+<!--l. 46--><p class="noindent" >Using the win32midi package is both fun and entertaining. You will be able to play or create music with the soundcard
+installed on your computer using the excellent Python language.
+<!--l. 50--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">1    </span> <a 
+ id="x1-20001"></a>What is win32midi package?</h3>
+
+<!--l. 52--><p class="noindent" >It is a package to provide access to the MIDI functions available on Microsoft Windows platforms. It provides both low
+and high level access so that developers, musicians can decide which to use based on their needs.
+<!--l. 56--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">2    </span> <a 
+ id="x1-30002"></a>Software Requirements</h3>
+<!--l. 58--><p class="noindent" >You need to have the following software installed:
+     <ul class="itemize1">
+     <li class="itemize">Python 2.7.x.
+     </li>
+     <li class="itemize">Microsoft Win32 environment such as Win XP, Win 2000.
+     </li>
+     <li class="itemize">Latest Microsoft DirectX if your soundcard does not have a MIDI synthesizer.</li></ul>
+<!--l. 69--><p class="noindent" >Note that the <span 
+class="pcrr7t-">player </span>is provided with this package and implements some high level functions to play music in
+Python.
+<!--l. 23--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">3    </span> <a 
+ id="x1-40003"></a><span 
+class="pcrr7t-">win32midi </span>&#8212; Python wrapper functions for Win32 MIDI APIs</h3>
+<a 
+ id="dx1-4001"></a>
+<!--l. 63--><p class="noindent" >The <span 
+class="pcrr7t-">win32midi </span>module defines operations for calling the Win32 MIDI APIs via Python. Most of the functions will
+return an error code which can be decoded with <span 
+class="pcrr7t-">midiOutGetErrorTextA</span>. See the descriptions of the functions for
+details.
+<!--l. 76--><p class="noindent" >The <span 
+class="pcrr7t-">win32midi </span>module defines the following functions:
+<!--l. 98--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInClose</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmi</span><span 
+class="pcrr7t-">)</span>                                                                     </dt><dd 
+class="list">
+     <!--l. 98--><p class="noindent" ><a 
+ id="dx1-4002"></a> Closes the MIDI input device specified by the handle, <span 
+class="ptmri7t-">hmi</span>.</dd></dl>
+<!--l. 102--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInGetDevCapsA</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">dev,cap</span><span 
+class="pcrr7t-">)</span>                                                           </dt><dd 
+class="list">
+     <!--l. 102--><p class="noindent" ><a 
+ id="dx1-4003"></a> Queries the MIDI input device, <span 
+class="ptmri7t-">dev</span>, to determine its capablities, which are stored in the MIDIOUTCAPSA
+     structure, <span 
+class="ptmri7t-">cap</span>. The result of the function call is returned.</dd></dl>
+<!--l. 106--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInGetErrorTextA</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">Error</span><span 
+class="pcrr7t-">)</span>                                                          </dt><dd 
+class="list">
+     <!--l. 106--><p class="noindent" ><a 
+ id="dx1-4004"></a> Returns the description text for the error code <span 
+class="ptmri7t-">Error </span>which is returned by most of the MIDI function calls
+     in this module.</dd></dl>
+<!--l. 110--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInGetID</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmi</span><span 
+class="pcrr7t-">)</span>                                                                     </dt><dd 
+class="list">
+     <!--l. 110--><p class="noindent" ><a 
+ id="dx1-4005"></a> Returns the device identifier for the MIDI input device specified by <span 
+class="ptmri7t-">hmi</span>.</dd></dl>
+<!--l. 114--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInGetNumDevs</span><span 
+class="pcrr7t-">(</span><span 
+class="pcrr7t-">)</span>                                                                  </dt><dd 
+class="list">
+     <!--l. 114--><p class="noindent" ><a 
+ id="dx1-4006"></a> Returns the number of MIDI input devices.</dd></dl>
+
+<!--l. 118--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInOpen</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">DeviceID, Callback, CallbackInstance, Flags</span><span 
+class="pcrr7t-">)</span>                                      </dt><dd 
+class="list">
+     <!--l. 118--><p class="noindent" ><a 
+ id="dx1-4007"></a> Open the MIDI device specified by the <span 
+class="ptmri7t-">DeviceID</span>. The <span 
+class="ptmri7t-">DeviceID </span>is a number from zero to one less than the
+     value returned by midiInGetNumDevs. <span 
+class="ptmri7t-">Callback </span>is currently not implemented. It should be specified as 0
+     for no callback. CallbackInstance is currently not implemented and should be specified as 0. <span 
+class="ptmri7t-">Flags </span>should
+     be specified as 0 for no callback mechanism. Other values of Flags are not implemented yet. This function
+     returns a pair of numbers consisting the result of the call and a handle to the MIDI input device if call is
+     successful.</dd></dl>
+<!--l. 123--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInPrepareHeader</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmi,hdr</span><span 
+class="pcrr7t-">)</span>                                                        </dt><dd 
+class="list">
+     <!--l. 123--><p class="noindent" ><a 
+ id="dx1-4008"></a> Prepares a MIDI system-exclusive or stream buffer, <span 
+class="ptmri7t-">hdr</span>, for input device specified by <span 
+class="ptmri7t-">hmi</span>.</dd></dl>
+<!--l. 127--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInReset</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmi</span><span 
+class="pcrr7t-">)</span>                                                                     </dt><dd 
+class="list">
+     <!--l. 127--><p class="noindent" ><a 
+ id="dx1-4009"></a> Stops all the input on MIDI input device specified by <span 
+class="ptmri7t-">hmi</span>.</dd></dl>
+<!--l. 131--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiInUnprepareHeader</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmi,hdr</span><span 
+class="pcrr7t-">)</span>                                                      </dt><dd 
+class="list">
+     <!--l. 131--><p class="noindent" ><a 
+ id="dx1-4010"></a> Cleans up the preparation performed by <span 
+class="pcrr7t-">midiInPrepareHeader </span>for input to device specified by <span 
+class="ptmri7t-">hmi</span>.</dd></dl>
+<!--l. 135--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutClose</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo</span><span 
+class="pcrr7t-">)</span>                                                                   </dt><dd 
+class="list">
+     <!--l. 135--><p class="noindent" ><a 
+ id="dx1-4011"></a> Closes the MIDI output device specified by the handle, <span 
+class="ptmri7t-">hmo</span>.</dd></dl>
+<!--l. 139--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutGetDevCapsA</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">dev,cap</span><span 
+class="pcrr7t-">)</span>                                                          </dt><dd 
+class="list">
+     <!--l. 139--><p class="noindent" ><a 
+ id="dx1-4012"></a> Queries the MIDI output device, <span 
+class="ptmri7t-">dev</span>, to determine its capablities, which are stored in the MIDIOUTCAPSA
+     structure, <span 
+class="ptmri7t-">cap</span>. The result of the function call is returned.</dd></dl>
+<!--l. 143--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutGetErrorTextA</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">Error</span><span 
+class="pcrr7t-">)</span>                                                         </dt><dd 
+class="list">
+     <!--l. 143--><p class="noindent" ><a 
+ id="dx1-4013"></a> Returns the description text for the error code <span 
+class="ptmri7t-">Error </span>which is returned by most of the MIDI function calls
+     in this module.</dd></dl>
+<!--l. 147--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutGetID</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo</span><span 
+class="pcrr7t-">)</span>                                                                   </dt><dd 
+class="list">
+     <!--l. 147--><p class="noindent" ><a 
+ id="dx1-4014"></a> Returns the device identifier for the MIDI output device specified by <span 
+class="ptmri7t-">hmo</span>.</dd></dl>
+<!--l. 151--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutGetNumDevs</span><span 
+class="pcrr7t-">(</span><span 
+class="pcrr7t-">)</span>                                                                 </dt><dd 
+class="list">
+     <!--l. 151--><p class="noindent" ><a 
+ id="dx1-4015"></a> Returns the number of MIDI output devices.</dd></dl>
+<!--l. 155--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutGetVolume</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo</span><span 
+class="pcrr7t-">)</span>                                                              </dt><dd 
+class="list">
+     <!--l. 155--><p class="noindent" ><a 
+ id="dx1-4016"></a> Returns a pair of numbers consisting of the result of the call and the current volume of a MIDI output
+     device specified by the handle, <span 
+class="ptmri7t-">hmo</span>. The low-order word is the left-channel volume while the high-order
+     word is the right channel setting. 0x0000 is silence. 0xFFFF is full volume.</dd></dl>
+<!--l. 159--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutLongMsg</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo,hdr</span><span 
+class="pcrr7t-">)</span>                                                              </dt><dd 
+class="list">
+     <!--l. 159--><p class="noindent" ><a 
+ id="dx1-4017"></a> Sends a system-exclusive MIDI message stored in the MIDIHDR structure, <span 
+class="ptmri7t-">hdr </span>to the MIDI output device
+     specified by <span 
+class="ptmri7t-">hmo</span>. Result of the call is returned.</dd></dl>
+<!--l. 163--><p class="noindent" >
+
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutOpen</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">DeviceID, Callback, CallbackInstance, Flags</span><span 
+class="pcrr7t-">)</span>                                     </dt><dd 
+class="list">
+     <!--l. 163--><p class="noindent" ><a 
+ id="dx1-4018"></a> Open the MIDI device specified by the <span 
+class="ptmri7t-">DeviceID</span>. The <span 
+class="ptmri7t-">DeviceID </span>is a number from zero to one less than the
+     value returned by midiOutGetNumDevs. <span 
+class="ptmri7t-">Callback </span>is currently not implemented. It should be specified as 0
+     for no callback. CallbackInstance is currently not implemented and should be specified as 0. <span 
+class="ptmri7t-">Flags </span>should
+     be specified as 0 for no callback mechanism. Other values of Flags are not implemented yet. This function
+     returns a pair of numbers consisting the result of the call and a handle to the MIDI output device if call is
+     successful.</dd></dl>
+<!--l. 168--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutPrepareHeader</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo,hdr</span><span 
+class="pcrr7t-">)</span>                                                       </dt><dd 
+class="list">
+     <!--l. 168--><p class="noindent" ><a 
+ id="dx1-4019"></a> Prepares a MIDI system-exclusive or stream buffer, <span 
+class="ptmri7t-">hdr</span>, for output device specified by <span 
+class="ptmri7t-">hmo</span>.</dd></dl>
+<!--l. 172--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutReset</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo</span><span 
+class="pcrr7t-">)</span>                                                                   </dt><dd 
+class="list">
+     <!--l. 172--><p class="noindent" ><a 
+ id="dx1-4020"></a> Turns off all the notes on all MIDI channels for the MIDI output device specified by the handle, <span 
+class="ptmri7t-">hmo</span>.</dd></dl>
+<!--l. 176--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutSetVolume</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo,Volume</span><span 
+class="pcrr7t-">)</span>                                                        </dt><dd 
+class="list">
+     <!--l. 176--><p class="noindent" ><a 
+ id="dx1-4021"></a> Set the current volume of a MIDI output device specified by the handle, <span 
+class="ptmri7t-">hmo </span>to the value, <span 
+class="ptmri7t-">Volume</span>. The
+     low-order word of <span 
+class="ptmri7t-">Volume </span>is the left-channel volume while the high-order word is the right channel setting.
+     0x0000 is silence. 0xFFFF is full volume. The result of the call is returned.</dd></dl>
+<!--l. 181--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutShortMsg</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo, Msg</span><span 
+class="pcrr7t-">)</span>                                                           </dt><dd 
+class="list">
+     <!--l. 181--><p class="noindent" ><a 
+ id="dx1-4022"></a> Sends a short MIDI message, <span 
+class="ptmri7t-">Msg</span>, to the MIDI output device specified by <span 
+class="ptmri7t-">hmo</span>.</dd></dl>
+<!--l. 185--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="pcrb7t-">midiOutUnprepareHeader</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">hmo,hdr</span><span 
+class="pcrr7t-">)</span>                                                    </dt><dd 
+class="list">
+     <!--l. 185--><p class="noindent" ><a 
+ id="dx1-4023"></a> Cleans up the preparation performed by <span 
+class="pcrr7t-">midiOutPrepareHeader </span>for output to device specified by
+     <span 
+class="ptmri7t-">hmo</span>.</dd></dl>
+<!--l. 23--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">4    </span> <a 
+ id="x1-50004"></a><span 
+class="pcrr7t-">player </span>&#8212; High level functions for playing music via the Win32 MIDI APIs</h3>
+<a 
+ id="dx1-5001"></a>
+<!--l. 65--><p class="noindent" >The <span 
+class="pcrr7t-">player </span>module defines simple high level APIs for playing music with the Windows MIDI functions via
+Python.
+<!--l. 78--><p class="noindent" >The <span 
+class="pcrr7t-">player </span>module defines the following features.
+<!--l. 124--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="ptmb7t-">exception </span><span 
+class="pcrb7t-">MIDIError</span><a 
+ id="dx1-5002"></a>                                                                    </dt><dd 
+class="list">
+     <!--l. 124--><p class="noindent" >Exception raised when an operation fails for a specific reason. The exception argument is a string describing
+     the reason of the failure.</dd></dl>
+<!--l. 143--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+<span 
+class="ptmb7t-">class </span><span 
+class="pcrb7t-">Player</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmr7t-x-x-144">[</span><span 
+class="ptmri7t-">dev=0 </span><span 
+class="ptmr7t-x-x-144">]</span><span 
+class="pcrr7t-">)</span>                                                                  </dt><dd 
+class="list">
+     <!--l. 143--><p class="noindent" ><a 
+ id="dx1-5003"></a> The Player class creates objects that provide the high level methods to play music in the API. Creates a
+     Player object that is associated with MIDI device number <span 
+class="ptmri7t-">dev</span>.
+     <!--l. 146--><p class="noindent" >The methods are listed below.
+     <!--l. 148--><p class="noindent" >
+
+         <dl class="list2"><dt class="list">
+     <span 
+class="pcrb7t-">setInstrument</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">self, num, chan=0</span><span 
+class="pcrr7t-">)</span>                                                   </dt><dd 
+class="list">
+         <!--l. 148--><p class="noindent" ><a 
+ id="dx1-5004"></a> This method set the Instrument for playing music. It set the instrument used on the channel, <span 
+class="ptmri7t-">chan </span>to
+         the instrument with GM MIDI patch number, <span 
+class="ptmri7t-">num</span>. The following table shows the instrument assigned
+         in the GM MIDI with their patch number.
+         <div class="center" 
+>
+<!--l. 151--><p class="noindent" >
+<a 
+ id="x1-5005r1"></a><!--l. 151--><div class="longtable"> <table id="TBL-1" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1"></colgroup><colgroup id="TBL-1-2g"><col 
+id="TBL-1-2"></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-1-1"  
+class="td11"><span 
+class="ptmb7t-">MIDI patch number</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-1-2"  
+class="td11"><span 
+class="ptmb7t-">Instrument</span></td>
+<td  id="TBL-1-1-3"  
+class="td10">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-2-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-2-1"  
+class="td11">               </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-3-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-3-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-4-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-4-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-4-2"  
+class="td11"></td></tr>
+<tr  
+ style="vertical-align:baseline;" id="TBL-1-5-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-5-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-5-2"  
+class="td11">Piano                          </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-6-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-6-1"  
+class="td11"> 0</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-6-2"  
+class="td11">Acoustic grand piano </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-7-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-7-1"  
+class="td11"> 1</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-7-2"  
+class="td11">Bright acoustic piano </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-8-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-8-1"  
+class="td11"> 2</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-8-2"  
+class="td11">Electric grand piano   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-9-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-9-1"  
+class="td11"> 3</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-9-2"  
+class="td11">Honky-tonk piano      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-10-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-10-1"  
+class="td11"> 4</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-10-2"  
+class="td11">Rhodes piano             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-11-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-11-1"  
+class="td11"> 5</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-11-2"  
+class="td11">Chorused piano          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-12-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-12-1"  
+class="td11"> 6</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-12-2"  
+class="td11">Harpsichord               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-13-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-13-1"  
+class="td11"> 7</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-13-2"  
+class="td11">Clavinet                      </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-14-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-14-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-14-2"  
+class="td11">Chromatic Percussion</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-15-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-15-1"  
+class="td11"> 8</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-15-2"  
+class="td11">Celesta                       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-16-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-16-1"  
+class="td11"> 9</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-16-2"  
+class="td11">Glockenspiel              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-17-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-17-1"  
+class="td11">10</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-17-2"  
+class="td11">Music box                  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-18-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-18-1"  
+class="td11">11</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-18-2"  
+class="td11">Vibraphone                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-19-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-19-1"  
+class="td11">12</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-19-2"  
+class="td11">Marimba                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-20-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-20-1"  
+class="td11">13</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-20-2"  
+class="td11">Xylophone                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-21-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-21-1"  
+class="td11">14</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-21-2"  
+class="td11">Tubular bells              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-22-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-22-1"  
+class="td11">15</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-22-2"  
+class="td11">Dulcimer                    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-23-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-23-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-23-2"  
+class="td11">Organ                         </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-24-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-24-1"  
+class="td11">16</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-24-2"  
+class="td11">Hammond organ        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-25-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-25-1"  
+class="td11">  </td></tr>
+<tr  
+ style="vertical-align:baseline;" id="TBL-1-26-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-26-1"  
+class="td11">17</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-26-2"  
+class="td11">Percussive organ          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-27-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-27-1"  
+class="td11">18</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-27-2"  
+class="td11">Rock organ                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-28-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-28-1"  
+class="td11">19</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-28-2"  
+class="td11">Church organ               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-29-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-29-1"  
+class="td11">20</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-29-2"  
+class="td11">Reed organ                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-30-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-30-1"  
+class="td11">21</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-30-2"  
+class="td11">Accordion                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-31-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-31-1"  
+class="td11">22</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-31-2"  
+class="td11">Harmonica                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-32-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-32-1"  
+class="td11">23</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-32-2"  
+class="td11">Tango accordion           </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-33-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-33-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-33-2"  
+class="td11">Guitar                           </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-34-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-34-1"  
+class="td11">24</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-34-2"  
+class="td11">Acoustic guitar (nylon)</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-35-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-35-1"  
+class="td11">25</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-35-2"  
+class="td11">Acoustic guitar (steel)  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-36-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-36-1"  
+class="td11">26</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-36-2"  
+class="td11">Electric guitar (jazz)    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-37-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-37-1"  
+class="td11">27</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-37-2"  
+class="td11">Electric guitar (clean)  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-38-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-38-1"  
+class="td11">28</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-38-2"  
+class="td11">Electric guitar (muted) </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-39-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-39-1"  
+class="td11">29</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-39-2"  
+class="td11">Overdriven guitar         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-40-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-40-1"  
+class="td11">30</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-40-2"  
+class="td11">Distortion guitar           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-41-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-41-1"  
+class="td11">31</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-41-2"  
+class="td11">Guitar harmonics         </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-42-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-42-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-42-2"  
+class="td11">Brass                            </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-43-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-43-1"  
+class="td11">32</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-43-2"  
+class="td11">Acoustic bass               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-44-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-44-1"  
+class="td11">33</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-44-2"  
+class="td11">Electric bass (finger)    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-45-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-45-1"  
+class="td11">34</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-45-2"  
+class="td11">Electric bass (pick)      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-46-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-46-1"  
+class="td11">  </td></tr>
+<tr  
+ style="vertical-align:baseline;" id="TBL-1-47-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-47-1"  
+class="td11">35</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-47-2"  
+class="td11">Fretless bass         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-48-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-48-1"  
+class="td11">36</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-48-2"  
+class="td11">Slap bass 1           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-49-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-49-1"  
+class="td11">37</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-49-2"  
+class="td11">Slap bass 2           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-50-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-50-1"  
+class="td11">38</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-50-2"  
+class="td11">Synth bass 1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-51-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-51-1"  
+class="td11">39</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-51-2"  
+class="td11">Synth bass 2         </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-52-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-52-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-52-2"  
+class="td11">Strings                  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-53-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-53-1"  
+class="td11">40</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-53-2"  
+class="td11">Violin                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-54-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-54-1"  
+class="td11">41</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-54-2"  
+class="td11">Viola                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-55-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-55-1"  
+class="td11">42</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-55-2"  
+class="td11">Cello                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-56-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-56-1"  
+class="td11">43</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-56-2"  
+class="td11">Contrabass           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-57-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-57-1"  
+class="td11">44</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-57-2"  
+class="td11">Tremolo strings    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-58-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-58-1"  
+class="td11">45</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-58-2"  
+class="td11">Pizzicato strings   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-59-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-59-1"  
+class="td11">46</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-59-2"  
+class="td11">Orchestral harp    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-60-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-60-1"  
+class="td11">47</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-60-2"  
+class="td11">Timpani               </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-61-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-61-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-61-2"  
+class="td11">Ensemble             </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-62-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-62-1"  
+class="td11">48</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-62-2"  
+class="td11">String ensemble 1</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-63-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-63-1"  
+class="td11">49</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-63-2"  
+class="td11">String ensemble 2</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-64-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-64-1"  
+class="td11">50</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-64-2"  
+class="td11">Synth. strings 1    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-65-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-65-1"  
+class="td11">51</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-65-2"  
+class="td11">Synth. strings 2    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-66-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-66-1"  
+class="td11">52</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-66-2"  
+class="td11">Choir Aahs           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-67-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-67-1"  
+class="td11">  </td>
+
+</tr>
+<tr  
+ style="vertical-align:baseline;" id="TBL-1-68-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-68-1"  
+class="td11">53</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-68-2"  
+class="td11">Voice Oohs     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-69-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-69-1"  
+class="td11">54</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-69-2"  
+class="td11">Synth voice     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-70-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-70-1"  
+class="td11">55</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-70-2"  
+class="td11">Orchestra hit   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-71-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-71-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-71-2"  
+class="td11">Brass               </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-72-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-72-1"  
+class="td11">56</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-72-2"  
+class="td11">Trumpet          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-73-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-73-1"  
+class="td11">57</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-73-2"  
+class="td11">Trombone       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-74-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-74-1"  
+class="td11">58</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-74-2"  
+class="td11">Tuba                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-75-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-75-1"  
+class="td11">59</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-75-2"  
+class="td11">Muted trumpet</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-76-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-76-1"  
+class="td11">60</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-76-2"  
+class="td11">French horn    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-77-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-77-1"  
+class="td11">61</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-77-2"  
+class="td11">Brass section   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-78-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-78-1"  
+class="td11">62</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-78-2"  
+class="td11">Synth. brass 1 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-79-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-79-1"  
+class="td11">63</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-79-2"  
+class="td11">Synth. brass 2 </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-80-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-80-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-80-2"  
+class="td11">Reed                </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-81-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-81-1"  
+class="td11">64</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-81-2"  
+class="td11">Soprano sax    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-82-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-82-1"  
+class="td11">65</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-82-2"  
+class="td11">Alto sax          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-83-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-83-1"  
+class="td11">66</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-83-2"  
+class="td11">Tenor sax        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-84-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-84-1"  
+class="td11">67</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-84-2"  
+class="td11">Baritone sax    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-85-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-85-1"  
+class="td11">68</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-85-2"  
+class="td11">Oboe               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-86-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-86-1"  
+class="td11">69</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-86-2"  
+class="td11">English horn   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-87-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-87-1"  
+class="td11">70</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-87-2"  
+class="td11">Bassoon          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-88-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-88-1"  
+class="td11">  </td></tr>
+<tr  
+ style="vertical-align:baseline;" id="TBL-1-89-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-89-1"  
+class="td11">71</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-89-2"  
+class="td11">Clarinet                      </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-90-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-90-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-90-2"  
+class="td11">Pipe                            </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-91-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-91-1"  
+class="td11">72</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-91-2"  
+class="td11">Piccolo                       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-92-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-92-1"  
+class="td11">73</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-92-2"  
+class="td11">Flute                           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-93-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-93-1"  
+class="td11">74</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-93-2"  
+class="td11">Recorder                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-94-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-94-1"  
+class="td11">75</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-94-2"  
+class="td11">Pan flute                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-95-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-95-1"  
+class="td11">76</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-95-2"  
+class="td11">Bottle blow                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-96-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-96-1"  
+class="td11">77</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-96-2"  
+class="td11">Shakuhachi                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-97-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-97-1"  
+class="td11">78</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-97-2"  
+class="td11">Whistle                       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-98-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-98-1"  
+class="td11">79</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-98-2"  
+class="td11">Ocarina                      </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-99-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-99-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-99-2"  
+class="td11">Synth Lead                 </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-100-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-100-1"  
+class="td11">80</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-100-2"  
+class="td11">Lead 1 (square)          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-101-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-101-1"  
+class="td11">81</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-101-2"  
+class="td11">Lead 2 (sawtooth)      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-102-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-102-1"  
+class="td11">82</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-102-2"  
+class="td11">Lead 3 (calliope lead)</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-103-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-103-1"  
+class="td11">83</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-103-2"  
+class="td11">Lead 4 (chiff lead)     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-104-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-104-1"  
+class="td11">84</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-104-2"  
+class="td11">Lead 5 (charang)        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-105-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-105-1"  
+class="td11">85</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-105-2"  
+class="td11">Lead 6 (voice)            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-106-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-106-1"  
+class="td11">86</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-106-2"  
+class="td11">Lead 7 (fifths)            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-107-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-107-1"  
+class="td11">87</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-107-2"  
+class="td11">Lead 8 (brass + lead) </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-108-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-108-1"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-108-2"  
+class="td11">Synth Pad                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-109-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-109-1"  
+class="td11">  </td></tr>
+<tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-110-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-110-1"  
+class="td11"> 88</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-110-2"  
+class="td11">Pad 1 (new age)   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-111-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-111-1"  
+class="td11"> 89</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-111-2"  
+class="td11">Pad 2 (warm)       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-112-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-112-1"  
+class="td11"> 90</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-112-2"  
+class="td11">Pad 3 (polysynth)</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-113-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-113-1"  
+class="td11"> 91</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-113-2"  
+class="td11">Pad 4 (choir)        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-114-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-114-1"  
+class="td11"> 92</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-114-2"  
+class="td11">Pad 5 (bowed)     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-115-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-115-1"  
+class="td11"> 93</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-115-2"  
+class="td11">Pad 6 (metallic)   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-116-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-116-1"  
+class="td11"> 94</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-116-2"  
+class="td11">Pad 7 (halo)         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-117-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-117-1"  
+class="td11"> 95</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-117-2"  
+class="td11">Pad 8 (sweep)      </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-118-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-118-1"  
+class="td11">   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-118-2"  
+class="td11">Sound Effects      </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-119-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-119-1"  
+class="td11">120</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-119-2"  
+class="td11">Guitar fret noise  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-120-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-120-1"  
+class="td11">121</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-120-2"  
+class="td11">Breath noise        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-121-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-121-1"  
+class="td11">122</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-121-2"  
+class="td11">Seashore              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-122-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-122-1"  
+class="td11">123</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-122-2"  
+class="td11">Bird tweet            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-123-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-123-1"  
+class="td11">124</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-123-2"  
+class="td11">Telephone ring    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-124-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-124-1"  
+class="td11">125</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-124-2"  
+class="td11">Helicopter            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-125-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-125-1"  
+class="td11">126</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-125-2"  
+class="td11">Applause             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-126-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-126-1"  
+class="td11">127</td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-126-2"  
+class="td11">Gunshot               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-127-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-127-1"  
+class="td11">   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-128-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-128-1"  
+class="td11">   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-129-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-129-1"  
+class="td11">   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-130-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-130-1"  
+class="td11">   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-131-"><td  style="white-space:nowrap; text-align:right;" id="TBL-1-131-1"  
+class="td11">   </td></tr>
+</table></div>
+</div>
+         </dd></dl>
+     <!--l. 299--><p class="noindent" >
+         <dl class="list2"><dt class="list">
+     <span 
+class="pcrb7t-">setTempo</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">self, val</span><span 
+class="pcrr7t-">)</span>                                                                </dt><dd 
+class="list">
+         <!--l. 299--><p class="noindent" ><a 
+ id="dx1-5006"></a> Sets the tempo of the music to be played to <span 
+class="ptmri7t-">val</span>. In other words, the music will be played to <span 
+class="ptmri7t-">val </span>beats
+         per minute.</dd></dl>
+     <!--l. 303--><p class="noindent" >
+         <dl class="list2"><dt class="list">
+     <span 
+class="pcrb7t-">setVolume</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">self, left, right</span><span 
+class="pcrr7t-">)</span>                                                          </dt><dd 
+class="list">
+         <!--l. 303--><p class="noindent" ><a 
+ id="dx1-5007"></a> Sets the volume of the synthesizer to the values <span 
+class="ptmri7t-">left</span>, for left speaker, and <span 
+class="ptmri7t-">right</span>, for right speaker.</dd></dl>
+     <!--l. 307--><p class="noindent" >
+         <dl class="list2"><dt class="list">
+
+     <span 
+class="pcrb7t-">getVolume</span><span 
+class="pcrr7t-">(</span><span 
+class="pcrr7t-">)</span>                                                                     </dt><dd 
+class="list">
+         <!--l. 307--><p class="noindent" ><a 
+ id="dx1-5008"></a> Gets the volumes of the synthesizer. The return value is a tuple, (left, right), for left and right speakers
+         repectively.</dd></dl>
+     <!--l. 311--><p class="noindent" >
+         <dl class="list2"><dt class="list">
+     <span 
+class="pcrb7t-">playNote</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">self, num, vel=120, len=0, chan=0</span><span 
+class="pcrr7t-">)</span>                                            </dt><dd 
+class="list">
+         <!--l. 311--><p class="noindent" ><a 
+ id="dx1-5009"></a> Plays the note, <span 
+class="ptmri7t-">num</span>, at velocity, <span 
+class="ptmri7t-">vel </span>in channel, <span 
+class="ptmri7t-">chan</span>. <span 
+class="ptmri7t-">num </span>is the MIDI note as defined in the MIDI
+         specification, with Middle C at 60. To indicate a rest, use 99 for <span 
+class="ptmri7t-">num</span>. <span 
+class="ptmri7t-">vel </span>is the velocity of playing the
+         note, the higher the louder the note is played. <span 
+class="ptmri7t-">chan </span>is the MIDI channel to play the note in.</dd></dl>
+     <!--l. 315--><p class="noindent" >
+         <dl class="list2"><dt class="list">
+     <span 
+class="pcrb7t-">playChord</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">chord, vel=100, len=0, chan=0</span><span 
+class="pcrr7t-">)</span>                                             </dt><dd 
+class="list">
+         <!--l. 315--><p class="noindent" ><a 
+ id="dx1-5010"></a> Plays the chord, <span 
+class="ptmri7t-">chord</span>, at velocity, <span 
+class="ptmri7t-">vel </span>in channel, <span 
+class="ptmri7t-">chan</span>. <span 
+class="ptmri7t-">chord </span>is a list of MIDI notes, as defined in
+         the MIDI specification, with Middle C at 60. To indicate a rest, use 99 for the value of the note. <span 
+class="ptmri7t-">vel </span>is
+         the velocity of playing the note, the higher the louder the note is played. <span 
+class="ptmri7t-">chan </span>is the MIDI channel to
+         play the chord in.</dd></dl>
+     <!--l. 319--><p class="noindent" >
+         <dl class="list2"><dt class="list">
+     <span 
+class="pcrb7t-">playPiece</span><span 
+class="pcrr7t-">(</span><span 
+class="ptmri7t-">noteStruct,chordStruct</span><span 
+class="pcrr7t-">)</span>                                                    </dt><dd 
+class="list">
+         <!--l. 319--><p class="noindent" ><a 
+ id="dx1-5011"></a> This method plays a piece of music defined with the melody notes in the <span 
+class="ptmri7t-">noteStruct </span>and the chord
+         in the <span 
+class="ptmri7t-">chordStruct</span>. The <span 
+class="ptmri7t-">noteStruct </span>is a tuple with the first element to be a list of notes as defined in
+         the table below and the second element to be a list of timing information. The <span 
+class="ptmri7t-">chordStruct </span>is defined
+         similarly but each note is replaced by a list of notes that made up the chord to be played at that instance.
+         <!--l. 322--><p class="noindent" >The following is a table that defines the notation to play the respective musical notes. The notation is
+         designed as a mnemonic such that the first digit indicates the octave relative to the Middle C, while the
+         second digit indicates the note within each octave with C as 1, D as 2 and so on. Sharps are indicated
+         as half note higher, for example C# as 1.5
+         <!--l. 324--><p class="noindent" >The table shows only notation defined for the definition of melody notes. For chord notes, the notes
+         definitions are the same but each note is played at one octave lower. In other words, the C below
+         Middle C is defined as 1 instead of -11. This is to reduce the number of typing for entering the chord
+         notes.
+         <div class="tabular"> <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"></colgroup><colgroup id="TBL-2-2g"><col 
+id="TBL-2-2"></colgroup><colgroup id="TBL-2-3g"><col 
+id="TBL-2-3"></colgroup><colgroup id="TBL-2-4g"><col 
+id="TBL-2-4"></colgroup><colgroup id="TBL-2-5g"><col 
+id="TBL-2-5"></colgroup><colgroup id="TBL-2-6g"><col 
+id="TBL-2-6"></colgroup><colgroup id="TBL-2-7g"><col 
+id="TBL-2-7"></colgroup><colgroup id="TBL-2-8g"><col 
+id="TBL-2-8"></colgroup><colgroup id="TBL-2-9g"><col 
+id="TBL-2-9"></colgroup><colgroup id="TBL-2-10g"><col 
+id="TBL-2-10"></colgroup><colgroup id="TBL-2-11g"><col 
+id="TBL-2-11"></colgroup><colgroup id="TBL-2-12g"><col 
+id="TBL-2-12"></colgroup><colgroup id="TBL-2-13g"><col 
+id="TBL-2-13"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-1"  
+class="td11">Octave #</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-2"  
+class="td11"> C </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-3"  
+class="td11"> C#  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-4"  
+class="td11"> D </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-5"  
+class="td11"> D#  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-6"  
+class="td11"> E </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-7"  
+class="td11"> F  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-8"  
+class="td11"> F#  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-9"  
+class="td11"> G </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-10"  
+class="td11"> G#  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-11"  
+class="td11"> A </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-12"  
+class="td11"> A#  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-13"  
+class="td11"> B </td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-1"  
+class="td11"> -5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-2"  
+class="td11">-51</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-3"  
+class="td11">-51.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-4"  
+class="td11">-52</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-5"  
+class="td11">-52.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-6"  
+class="td11">-53</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-7"  
+class="td11">-54</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-8"  
+class="td11">-55.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-9"  
+class="td11">-55</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-10"  
+class="td11">-55.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-11"  
+class="td11">-56</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-12"  
+class="td11">-56.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-13"  
+class="td11">-57</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-1"  
+class="td11">  -4      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-2"  
+class="td11">-41</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-3"  
+class="td11">-41.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-4"  
+class="td11">-42</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-5"  
+class="td11">-42.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-6"  
+class="td11">-43</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-7"  
+class="td11">-44</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-8"  
+class="td11">-44.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-9"  
+class="td11">-45</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-10"  
+class="td11">-45.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-11"  
+class="td11">-46</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-12"  
+class="td11">-46.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-13"  
+class="td11">-47</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-1"  
+class="td11"> -3 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-2"  
+class="td11">-31</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-3"  
+class="td11">-31.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-4"  
+class="td11">-32</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-5"  
+class="td11">-32.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-6"  
+class="td11">-33</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-7"  
+class="td11">-34</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-8"  
+class="td11">-34.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-9"  
+class="td11">-35</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-10"  
+class="td11">-35.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-11"  
+class="td11">-36</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-12"  
+class="td11">-36.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-13"  
+class="td11">-37</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-1"  
+class="td11">  -2      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-2"  
+class="td11">-21</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-3"  
+class="td11">-21.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-4"  
+class="td11">-22</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-5"  
+class="td11">-22.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-6"  
+class="td11">-23</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-7"  
+class="td11">-24</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-8"  
+class="td11">-24.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-9"  
+class="td11">-25</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-10"  
+class="td11">-25.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-11"  
+class="td11">-26</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-12"  
+class="td11">-26.5</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-13"  
+class="td11">-27</td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-1"  
+class="td11"> -1 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-2"  
+class="td11">-11</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-3"  
+class="td11">-11.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-4"  
+class="td11">-12</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-5"  
+class="td11">-12.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-6"  
+class="td11">-13</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-7"  
+class="td11">-14</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-8"  
+class="td11">-14.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-9"  
+class="td11">-15</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-10"  
+class="td11">-15.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-11"  
+class="td11">-16</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-12"  
+class="td11">-16.5</td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-13"  
+class="td11">-17</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-1"  
+class="td11">   0       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-2"  
+class="td11"> 1  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-3"  
+class="td11"> 1.5  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-4"  
+class="td11"> 2  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-5"  
+class="td11"> 2.5  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-6"  
+class="td11"> 3  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-7"  
+class="td11"> 4  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-8"  
+class="td11"> 4.5  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-9"  
+class="td11"> 5  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-10"  
+class="td11"> 5.5  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-11"  
+class="td11"> 6  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-12"  
+class="td11"> 6.5  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-13"  
+class="td11"> 7  </td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-1"  
+class="td11"> 1 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-2"  
+class="td11"> 11 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-3"  
+class="td11"> 11.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-4"  
+class="td11"> 12 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-5"  
+class="td11"> 12.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-6"  
+class="td11"> 13 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-7"  
+class="td11"> 14 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-8"  
+class="td11"> 14.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-9"  
+class="td11"> 15 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-10"  
+class="td11"> 15.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-11"  
+class="td11"> 16 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-12"  
+class="td11"> 16.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-13"  
+class="td11"> 17</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-9-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-1"  
+class="td11">   2       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-2"  
+class="td11"> 21 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-3"  
+class="td11"> 21.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-4"  
+class="td11"> 22 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-5"  
+class="td11"> 22.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-6"  
+class="td11"> 23 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-7"  
+class="td11"> 24 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-8"  
+class="td11"> 24.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-9"  
+class="td11"> 25 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-10"  
+class="td11"> 25.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-11"  
+class="td11"> 26 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-12"  
+class="td11"> 26.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-13"  
+class="td11"> 27 </td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-10-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-1"  
+class="td11"> 3 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-2"  
+class="td11"> 31 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-3"  
+class="td11"> 31.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-4"  
+class="td11"> 32 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-5"  
+class="td11"> 32.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-6"  
+class="td11"> 33 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-7"  
+class="td11"> 34 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-8"  
+class="td11"> 34.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-9"  
+class="td11"> 35 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-10"  
+class="td11"> 35.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-11"  
+class="td11"> 36 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-12"  
+class="td11"> 36.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-13"  
+class="td11"> 37</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-11-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-1"  
+class="td11">   4       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-2"  
+class="td11"> 41 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-3"  
+class="td11"> 41.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-4"  
+class="td11"> 42 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-5"  
+class="td11"> 42.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-6"  
+class="td11"> 43 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-7"  
+class="td11"> 44 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-8"  
+class="td11"> 44.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-9"  
+class="td11"> 45 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-10"  
+class="td11"> 45.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-11"  
+class="td11"> 46 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-12"  
+class="td11"> 46.5 </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-13"  
+class="td11"> 47 </td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-12-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-1"  
+class="td11"> 5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-2"  
+class="td11"> 51 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-3"  
+class="td11"> 51.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-4"  
+class="td11"> 52 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-5"  
+class="td11"> 52.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-6"  
+class="td11"> 53 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-7"  
+class="td11"> 54 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-8"  
+class="td11"> 54.5 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-9"  
+class="td11"> 55 </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-10"  
+class="td11"> </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-11"  
+class="td11"> </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-12"  
+class="td11"> </td> <td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-13"  
+class="td11"></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-13-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-13-1"  
+class="td11">      </td></tr></table>
+         </div>
+         <!--l. 499--><p class="noindent" >For entering the timing information, the table below shows the simplified notation used for the different
+         notes.
+         <div class="center" 
+>
+<!--l. 501--><p class="noindent" >
+<div class="tabular"> <table id="TBL-3" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"></colgroup><colgroup id="TBL-3-2g"><col 
+id="TBL-3-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-1"  
+class="td11"><span 
+class="ptmb7t-">Note      </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-2"  
+class="td11"><span 
+class="ptmb7t-">Notation</span></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-1"  
+class="td11">Whole </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-2"  
+class="td11"> 1</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-1"  
+class="td11">Half        </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-2"  
+class="td11">   2      </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-4-1"  
+class="td11">Quarter </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-2"  
+class="td11"> 4</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-5-1"  
+class="td11">Eighth    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-2"  
+class="td11">   8      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-6-1"  
+class="td11">Sixteenth</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-6-2"  
+class="td11">  16     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-7-1"  
+class="td11">32nd       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-7-2"  
+class="td11">  32     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-8-1"  
+class="td11">64nd       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-8-2"  
+class="td11">  64     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-9-1"  
+class="td11">      </td></tr></table>
+</div></div>
+         </dd></dl>
+     <!--l. 512--><p class="noindent" >For dotted notes, a .1 is appended to the notation. For example, a dotted quarter note will be indicated as
+     4.1
+     </dd></dl>
+
+<!--l. 521--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">4.1    </span> <a 
+ id="x1-60004.1"></a>Example </h4>
+<!--l. 522--><p class="noindent" >Check out the files lullaby.py and aura_lee.py for examples of playing a piece of music.
+ 
+</body></html> 
+
+
+
