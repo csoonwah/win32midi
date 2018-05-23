@@ -14,18 +14,10 @@ This package provides a Python extension to call the MIDI APIs in Windows. Sever
 Check out the file win32midiTest.py to find out how the module could be used. Double-clicking the same file should play some sample notes. A playertest.py play notes with the higher level API module, player. Check it out to play simple music. It also demonstrate how to play with more than one instrument together, as well as adding chords to your music. Some scripts are included to show the playing of music through the player module.
 
 ## Features
-The win32midi module provides wrappers to call Win32 MIDI APIs. The following APIs are available.
-- midiInOpen
-- midiInPrepareHeader
-- midiInClose
-- midiInGetDevCaps
-- midiInGetErrorText
-- midiInGetID
-- midiInGetNumDevs
-- midiInUnprepareHeader
+The win32midi module provides wrappers to call Win32 MIDI APIs. The following APIs are currently available.
 - midiOutClose
-- midiOutGetDevCaps
-- midiOutGetErrorText
+- midiOutGetDevCapsA
+- midiOutGetErrorTextA
 - midiOutGetID
 - midiOutGetNumDevs
 - midiOutGetVolume
@@ -36,27 +28,13 @@ The win32midi module provides wrappers to call Win32 MIDI APIs. The following AP
 - midiOutSetVolume
 - midiOutShortMsg
 - midiOutUnprepareHeader
-
-The following APIs are either incomplete or not yet tested to be working properly.
-- midiConnect
-- midiDisconnect
-- midiInAddBuffer
-- midiInMessage
-- midiInProc
-- midiInReset
-- midiInStart
-- midiInStop
-- midiOutCacheDrumPatches
-- midiOutCachePatches
-- midiOutMessage
-- midiStreamClose
 - midiStreamOpen
 - midiStreamOut
-- midiStreamPause
-- midiStreamPosition
-- midiStreamProperty
 - midiStreamRestart
-- midiStreamStop
+- midiStreamClose
+- midiInGetDevCapsA
+- midiInGetNumDevs
+
 As the documentation is still being written, please refer to the test programs to get a glimpse of how to use the module.
 
 Copyright S. W. Chua, 2004-2018, All rights reserved
