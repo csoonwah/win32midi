@@ -1,7 +1,12 @@
 # $Id: aura_lee.py 30 2007-01-28 17:12:07Z csw $
 # Copyright 2004-2018 Soon Wah Chua
 
-import player
+import os
+if os.name == 'java':
+    import jplayer 
+    player =  jplayer
+else:
+    import player
 
 mr = player.Player()
 mr.setInstrument('Bright acoustic piano') #or mr.setInstrument(1)

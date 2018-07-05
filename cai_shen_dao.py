@@ -1,6 +1,12 @@
 # $Id: lullaby.py 22 2004-12-21 07:29:44Z csw $
 # Copyright 2004-2018 Soon Wah Chua
-import player
+import os
+if os.name == 'java':
+    import jplayer 
+    player =  jplayer
+else:
+    import player
+
 
 mr = player.Player()
 mr.setInstrument('Koto') #or mr.setInstrument(107)
@@ -29,5 +35,4 @@ chord += (Am,) + (F,) +(G7,) +(Dm,) +(Am,)+(C,)*2 + (Dm,) + (F,) +(G7,) +(C,)*4
 chord_t += (1,)*8 + (2,)*2 + (1,)*4
 
 mr.setTempo(180)
-#mr.playPiece((notes,notes_t),(chord,chord_t))
 mr.playPiece2([(notes,notes_t),(chord,chord_t)])
