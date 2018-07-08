@@ -6,7 +6,7 @@ mr = player.Player() # Instantiate a Midi object
 # Set the musical instrument, 0 is for Acoustic Grand Piano
 # Check the General MIDI Specification for instrument number
 mr.setInstrument(0)
-
+mr.setVolume(32000,32000)
 # Play all the possible white keys in MIDI specification
 notes = (0,2,4,5,7,9,11) # For notes C,D,E,F,G,A,B respectively in an octave
 for octave in range(11):
@@ -26,14 +26,16 @@ tick += [1,1,1,1,1,1,2,1,1,1,1,1,1,2]
 ticksPerMin = 120
 timePerTick = 60./ticksPerMin
 print 'Volume', mr.getVolume()	
+l,r = mr.getVolume()
 for n in range(len(star)):
 	s = star[n]
 	sn = 5*12+notes[s-1]
 	# mr.outShortMsg(0x91,sn,120) # Can use outShortMsg or playNote
 	mr.playNote(sn,120,0)
-	#mr.setVolume(n*4,n*3)
+	mr.setVolume(int(l*1.01**n),int(r*1.01**n))
+#	print 'Volume', mr.getVolume()
 	time.sleep(timePerTick*tick[n])
-print mr.getVolume()
+print 'Volume', mr.getVolume()
 # Playing percussion instruments
 print 'Playing with percussion instruments'
 for v in range(1,127):

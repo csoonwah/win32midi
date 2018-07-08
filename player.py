@@ -17,19 +17,25 @@ if os.name == 'java':
     playMidiNote = lambda s,chan,num,vel: s.channels[chan].noteOn(num,vel)
     def setMidiVol(s,left, right):
         s.channels[0].controlChange(7,(left+right)>>8)
-        s.channels[0].controlChange(7+32,(left+right)%256)
+        #s.channels[0].controlChange(7+32,(left+right)%256)
         s.channels[0].controlChange(10,(right-left)>>8)
-        s.channels[0].controlChange(10+32,(right-left)%256)
+        #s.channels[0].controlChange(10+32,(right-left)%256)
         return 0
     progChange = lambda s,c,n: s.channels[c].programChange(n)
     threadStart = thread.start_new_thread
     waitTime = time.sleep
-    def getMidiVolume(s):
-        a = s.channels[0].getController(7)
-        b = s.channels[0].getController(7+32)
-        c = s.channels[0].getController(10)
-        d = s.channels[0].getController(10+32)
-        return a+c, a-c
+    def getMidiVol(s):
+        vh = s.channels[0].getController(7)
+        dh = s.channels[0].getController(7+32)
+        vl = s.channels[0].getController(10)
+        #dl = s.channels[0].getController(10+32)
+        v = vh<<7+vl
+        #d = dh<<7+dl
+        l = (float(64-dh)/64)*vh
+        l = int(l) if l>0 else 0
+        r = vh*float(dh+64)/64
+        r = int(r) if r>0 else 0
+        return 0,(l<<24)+(r<<8)
     def outShortMidiMsg(syn, cmd, first, second):
         """Send a MIDI short message to the synthesizer"""
         #midiOutShortMsg(s.syn,status|(first<<8)|second<<16)
@@ -47,7 +53,7 @@ else:
         setMidiVol = lambda s,left, right: midiOutSetVolume(s,(left<<16)|right)
         progChange = lambda s,c,n: midiOutShortMsg(s,0xc0|c|(n<<8))
         threadStart = thread.start_new
-        getMidiVolume = lambda s: midiOutGetVolume(s)
+        getMidiVol = lambda s: midiOutGetVolume(s)
         def outShortMidiMsg(syn, cmd, first, second):
             """Send a MIDI short message to the synthesizer"""
             midiOutShortMsg(syn,cmd|(first<<8)|second<<16)
@@ -157,7 +163,7 @@ class Player:
 
     def getVolume(self):
         """Return the left and right volume of the Synthesizer"""
-        r, v = getMidiVolume(self.syn)
+        r, v = getMidiVol(self.syn)
         return (v>>16)&0xFFFF, v & 0xFFFF
 
     def outShortMsg(self, status, first, second):
