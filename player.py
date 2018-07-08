@@ -2,19 +2,63 @@
 # $Id: player.py 30 2007-01-28 17:12:07Z csw $
 # Copyright 2004-2018 Soon Wah Chua
 
-import sys
-from timing import waitTime
-if sys.winver >= '2.7':
-    from win32midi2 import *
-else:
-    print "Python version not supported"
-    exit(1)
+import sys, os
 import time,thread
-import cPickle
+if os.name == 'java':
+    import pickle
+    from javax.sound.midi import *
+    def getSyn(x):
+        s = MidiSystem.getSynthesizer()
+        r = s.open()
+        return r,s
+
+    def closeSyn(x):
+        x.close()
+        x = None
+    playMidiNote = lambda s,chan,num,vel: s.channels[chan].noteOn(num,vel)
+    def setMidiVol(s,left, right):
+        s.channels[0].controlChange(7,(left+right)>>8)
+        s.channels[0].controlChange(7+32,(left+right)%256)
+        s.channels[0].controlChange(10,(right-left)>>8)
+        s.channels[0].controlChange(10+32,(right-left)%256)
+        return 0
+    progChange = lambda s,c,n: s.channels[c].programChange(n)
+    threadStart = thread.start_new_thread
+    waitTime = time.sleep
+    def getMidiVolume(s):
+        a = s.channels[0].getController(7)
+        b = s.channels[0].getController(7+32)
+        c = s.channels[0].getController(10)
+        d = s.channels[0].getController(10+32)
+        return a+c, a-c
+    def outShortMidiMsg(syn, cmd, first, second):
+        """Send a MIDI short message to the synthesizer"""
+        #midiOutShortMsg(s.syn,status|(first<<8)|second<<16)
+        synRcvr = syn.getReceiver(); 
+        synRcvr.send(ShortMessage(cmd, 0, first,second),-1)
+else:
+    import cPickle as pickle
+    from timing import waitTime
+
+    if sys.winver >= '2.7':
+        from win32midi2 import *
+        getSyn = lambda x: midiOutOpen(x,0,0,0)
+        closeSyn = lambda x: midiOutClose(x)
+        playMidiNote = lambda s,chan,num,vel: midiOutShortMsg(s,0x90|chan|(num<<8)|vel<<16)
+        setMidiVol = lambda s,left, right: midiOutSetVolume(s,(left<<16)|right)
+        progChange = lambda s,c,n: midiOutShortMsg(s,0xc0|c|(n<<8))
+        threadStart = thread.start_new
+        getMidiVolume = lambda s: midiOutGetVolume(s)
+        def outShortMidiMsg(syn, cmd, first, second):
+            """Send a MIDI short message to the synthesizer"""
+            midiOutShortMsg(syn,cmd|(first<<8)|second<<16)
+    else:
+        print "Python version not supported"
+        exit(1)
 
 global COUNTS
 COUNTS=0
-_patches = cPickle.load(open('patches.dat','rb'))
+_patches = pickle.load(open('patches.dat','rb'))
 
 def buildScale(chord=0):
     scale = {}
@@ -47,13 +91,13 @@ class Player:
     """
     
     def __init__(self,dev=0):
-        ret, self.h = midiOutOpen(dev,0,0,0)
-        if not(ret==0):
-            raise MIDIError('Device open operation failed')
+        ret, self.syn = getSyn(dev)
+        #if not(ret==0):
+        #    raise MIDIError('Device open operation failed')
         self.setTempo(120)
         
     def __del__(self):
-        midiOutClose(self.h)
+        closeSyn(self.syn)
 
     def setInstrument(self, instrument=0, chan=0):
         """Select the instrument for playing
@@ -62,7 +106,7 @@ class Player:
             num = _patches[instrument]
         else:
             num = instrument
-        midiOutShortMsg(self.h,0xc0|chan|(num<<8))
+        progChange(self.syn,chan,num)
 
     def setChordInstrument(self, instrument=0, startChan=1, maxNotes=3):
         """Select the instrument for playing
@@ -73,7 +117,7 @@ class Player:
             num = instrument
 
         for i in range(maxNotes):
-            midiOutShortMsg(self.h,0xc0|startChan+i|(num<<8))
+            progChange(self.syn,startChan+i,num)
 
     def listInstruments(self):
         import pprint
@@ -90,7 +134,7 @@ class Player:
         if(vel > 127 or vel < 0):
             raise MIDIError('Velocity out of range')
         # Setup the MIDI packet
-        midiOutShortMsg(self.h,0x90|chan|(num<<8)|vel<<16)
+        playMidiNote(self.syn,chan,num,vel)
 
     def playChord(self, chord, vel=100, len=0, chan=0):
         """
@@ -105,21 +149,22 @@ class Player:
                 raise MIDIError('Velocity out of range')
         # Setup the MIDI packet
         for num in chord:
-            midiOutShortMsg(self.h,0x90|chan|(num<<8)|vel<<16)
+            playMidiNote(self.syn,chan,num,vel)
 
     def setVolume(self, left, right):
         """Set the left and right volume of the Synthesizer
         The volume setting can range from 0 to 65535 for each channel"""
-        return midiOutSetVolume(self.h,(left<<16)|right)
+        return setMidiVol(self.syn,left,right)
 
     def getVolume(self):
         """Return the left and right volume of the Synthesizer"""
-        r, v = midiOutGetVolume(self.h)
+        r, v = getMidiVolume(self.syn)
         return (v>>16)&0xFFFF, v & 0xFFFF
 
     def outShortMsg(self, status, first, second):
         """Send a MIDI short message to the synthesizer"""
-        midiOutShortMsg(self.h,status|(first<<8)|second<<16)
+        if first < 128 and second < 128:
+            outShortMidiMsg(self.syn,status,first,second)
 
     def setTempo(self,val):
         """Set the Tempo to val"""
@@ -144,8 +189,6 @@ class Player:
             else:
                 if not (chord[i] == 99):
                     self.playChord(map(lambda j:curScale[j],[chord[i]]))
-
-            #time.sleep(self._noteTimings[chord_t[i]])
             waitTime(self._noteTimings[chord_t[i]])
         COUNTS-=1
 
@@ -154,7 +197,6 @@ class Player:
         for i in range(len(notes)):
             if not (notes[i] == 99):
                 self.playNote(CMajor[notes[i]])
-            #time.sleep(self._noteTimings[notes_t[i]])
             waitTime(self._noteTimings[notes_t[i]])
 
     def playPiece(self,notesStruct,chordStruct):
@@ -164,7 +206,7 @@ class Player:
         chordStruct is a tuple, (chords, chords_t) where notes is the list of chords and
             chords_t is the list of timings for chords
         """
-        thread.start_new(self.playAllChord,chordStruct)
+        threadStart(self.playAllChord,chordStruct)
         apply(self.playAllNotes,notesStruct)
         
     def playPiece2(self,chordStructs):
@@ -173,9 +215,9 @@ class Player:
             chords_t is the list of timings for chords
         """
         global COUNTS
-        thread.start_new(self.playAllChord,chordStructs[0]+(0,))
+        threadStart(self.playAllChord,chordStructs[0]+(0,))
         for i in range(1,len(chordStructs)):
-            thread.start_new(self.playAllChord,chordStructs[i])
+            threadStart(self.playAllChord,chordStructs[i])
         time.sleep(1)
         while (COUNTS>0):
             time.sleep(2)

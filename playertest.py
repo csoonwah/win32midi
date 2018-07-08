@@ -1,13 +1,8 @@
 # A simple MIDI player demo
 # $Id: playertest.py 29 2005-05-04 02:26:03Z csw $
 # Copyright 2004-2018 Soon Wah Chua
-import os
-if os.name=='java':
-  import jplayer
-  player = jplayer
-else:
-  import player
-import time
+import player
+import time,os
 mr = player.Player() # Instantiate a Midi object
 # Set the musical instrument, 0 is for Acoustic Grand Piano
 # Check the General MIDI Specification for instrument number

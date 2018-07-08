@@ -1,12 +1,7 @@
 # $Id: lullaby.py 30 2007-01-28 17:12:07Z csw $
 # Copyright 2004-2018 Soon Wah Chua
     
-import os
-if os.name == 'java':
-    import jplayer 
-    player =  jplayer
-else:
-    import player
+import player
 
 mr = player.Player()
 mr.setInstrument('Acoustic grand piano') #or mr.setInstrument(0)
