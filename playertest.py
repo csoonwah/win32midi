@@ -1,5 +1,4 @@
 # A simple MIDI player demo
-# $Id: playertest.py 29 2005-05-04 02:26:03Z csw $
 # Copyright 2004-2018 Soon Wah Chua
 import player
 import time,os

@@ -1,5 +1,4 @@
 # A simple Python class to provide some high level MIDI APIs to play MIDI
-# $Id: player.py 30 2007-01-28 17:12:07Z csw $
 # Copyright 2004-2018 Soon Wah Chua
 
 import sys, os

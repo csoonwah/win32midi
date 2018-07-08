@@ -1,4 +1,3 @@
-# $Id: lullaby.py 22 2004-12-21 07:29:44Z csw $
 # Copyright 2004-2018 Soon Wah Chua
 import os
 if os.name == 'java':

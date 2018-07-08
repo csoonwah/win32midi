@@ -1,5 +1,4 @@
-# A simple Python class to provide some high level MIDI APIs to play MIDI
-# $Id: player.py 27 2005-02-01 03:04:14Z csw $
+# A simple Jython class to provide some high level MIDI APIs to play MIDI
 # Copyright 2004-2018 Soon Wah Chua
 
 from javax.sound.midi import *
