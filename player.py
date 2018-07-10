@@ -56,10 +56,10 @@ else:
         from win32midi2 import *
         getSyn = lambda x: midiOutOpen(x, 0, 0, 0)
         closeSyn = lambda x: midiOutClose(x)
-        playMidiNote = lambda s, chan, num, vel: midiOutShortMsg(s,
-                        0x90 | chan | (num << 8) | vel << 16)
-        setMidiVol = lambda s, left, right: midiOutSetVolume(s, (left << 16) |
-                        right)
+        playMidiNote = lambda s, chan, num, vel: \
+            midiOutShortMsg(s, 0x90 | chan | (num << 8) | vel << 16)
+        setMidiVol = lambda s, left, right: \
+            midiOutSetVolume(s, (left << 16) | right)
         progChange = lambda s, c, n: midiOutShortMsg(s, 0xc0 | c | (n << 8))
         threadStart = thread.start_new
         getMidiVol = lambda s: midiOutGetVolume(s)
@@ -196,7 +196,7 @@ class Player:
         self.tpb = 60. / val * 4
         _noteLen = [1, 2, 4, 8, 12, 16, 32, 64]
         self._noteTimings = dict(zip(_noteLen, map(lambda x: self.tpb / x,
-            _noteLen)))
+                                 _noteLen)))
         _noteLen = [1.1, 2.1, 4.1, 8.1, 16.1, 32.1, 64.1]
         for n in _noteLen:
             self._noteTimings[n] = self.tpb / int(n)
