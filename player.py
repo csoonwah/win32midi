@@ -1,5 +1,5 @@
 # A simple Python class to provide some high level MIDI APIs to play MIDI
-# Copyright 2004-2018 Soon Wah Chua
+# Copyright 2004-2023 Soon Wah Chua
 
 import sys
 import os

@@ -1,4 +1,4 @@
-# Copyright 2004-2018 Soon Wah Chua
+# Copyright 2004-2023 Soon Wah Chua
 from win32midi2 import *
 import time
 print('Num of Input/Output Devices', midiInGetNumDevs(), '/', \

@@ -1,5 +1,5 @@
 # A simple MIDI player demo
-# Copyright 2004-2018 Soon Wah Chua
+# Copyright 2004-2023 Soon Wah Chua
 import player
 import time
 import os

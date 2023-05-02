@@ -1,3 +1,4 @@
+# Copyright 2004-2023 Soon Wah Chua
 import ctypes
 from ctypes import byref
 from ctypes.wintypes import *

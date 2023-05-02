@@ -1,3 +1,5 @@
+# Copyright 2004-2023 Soon Wah Chua
+
 from ctypes import *
 
 
