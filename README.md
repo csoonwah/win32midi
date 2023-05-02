@@ -8,7 +8,7 @@ This package provides a Python extension to call the MIDI APIs in Windows. Sever
 ## System Requirements
 * Windows Operating system (tested on Windows 10)
 * Sound card or integrated sound device on motherboard, with hardware/software MIDI synthesizer
-* Python 2.7
+* Python 3.x
 
 ## Example
 Check out the file win32midiTest.py to find out how the module could be used. Double-clicking the same file should play some sample notes. A playertest.py play notes with the higher level API module, player. Check it out to play simple music. It also demonstrate how to play with more than one instrument together, as well as adding chords to your music. Some scripts are included to show the playing of music through the player module.
@@ -37,4 +37,4 @@ The win32midi module provides wrappers to call Win32 MIDI APIs. The following AP
 
 As the documentation is still being written, please refer to the test programs to get a glimpse of how to use the module.
 
-Copyright S. W. Chua, 2004-2018, All rights reserved
+Copyright S. W. Chua, 2004-2023, All rights reserved
