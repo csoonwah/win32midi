@@ -7,7 +7,7 @@ mr = player.Player()
 # mr.setChordInstrument('Piano')
 mr.setChordInstrument(1)
 
-print 'Let\'s play the Entertainer'
+print('Let\'s play the Entertainer')
 
 notes = (12, 13, 11, 6, 6, 7, 5, 12, 13, 11, 6, 6, 7, 5)
 notes_t = (8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 4)

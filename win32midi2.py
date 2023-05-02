@@ -6,7 +6,7 @@ _wm = ctypes.WinDLL('winmm')
 
 
 def midiOutOpen(dev=0, a=0, b=0, c=0):
-    h = ctypes.c_int()
+    h = HANDLE()
     r = _wm.midiOutOpen(byref(h), dev, 0, 0, 0)
     return r, h
 
@@ -54,7 +54,7 @@ class MIDIOUTCAPSA(ctypes.Structure):
                 ("dwSupport", DWORD),
                 ]
 
-    def __getattr__(self, ame):
+    def __getattr__(self, name):
         if name == 'szPname':
             for i in range(32):
                 if self._szPname[i] == 0:

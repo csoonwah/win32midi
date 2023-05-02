@@ -5,7 +5,7 @@ mr = player.Player()
 # mr.setInstrument('Acoustic grand piano') #or mr.setInstrument(0)
 mr.setInstrument(0)
 
-print 'Let\'s play the Happy Music Friends'
+print('Let\'s play the Happy Music Friends')
 
 notes = (6, 6, 6, 6, 4, 5, 6, 5, 5, 2, 99, 5, 5, 5, 5, 3, 4, 5, 4, 4, 1, 99,
          99, 2, 3, 4, 3, 2, 1, 1, 6, 6, 6, 6, 5, 5, 6, 5, 11, 99, 99, 14, 14,

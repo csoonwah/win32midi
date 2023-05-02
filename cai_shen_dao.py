@@ -5,8 +5,8 @@ mr = player.Player()
 mr.setInstrument('Koto')  # or mr.setInstrument(107)
 mr.setChordInstrument('Koto')  # or mr.setInstrument(107)
 
-print 'Let\'s play the cai_shen_dao'
-print 'A Chinese New Year song that means the arrival of God of Fortune'
+print('Let\'s play the cai_shen_dao')
+print('A Chinese New Year song that means the arrival of God of Fortune')
 
 notes = (5, 5, 11, 99, 5, 5, 11, 99, 5, 5, 11, 11, 11, 5, 5, 1, 99, 99, 6, 6,
          12, 6, 6, 12, 6, 6, 6, 12, 6, 6, 5, 5, 11, 99, 99)

@@ -4,7 +4,7 @@
 import sys
 import os
 import time
-import thread
+import _thread
 if os.name == 'java':
     import pickle
     from javax.sound.midi import *
@@ -27,7 +27,7 @@ if os.name == 'java':
         # s.channels[0].controlChange(10 + 32,(right - left)%256)
         return 0
     progChange = lambda s, c, n: s.channels[c].programChange(n)
-    threadStart = thread.start_new_thread
+    threadStart = _thread.start_new_thread
     waitTime = time.sleep
 
     def getMidiVol(s):
@@ -49,7 +49,7 @@ if os.name == 'java':
         synRcvr = syn.getReceiver()
         synRcvr.send(ShortMessage(cmd, 0, first, second), -1)
 else:
-    import cPickle as pickle
+    import pickle as pickle
     from timing import waitTime
 
     if sys.winver >= '2.7':
@@ -61,14 +61,14 @@ else:
         setMidiVol = lambda s, left, right: \
             midiOutSetVolume(s, (left << 16) | right)
         progChange = lambda s, c, n: midiOutShortMsg(s, 0xc0 | c | (n << 8))
-        threadStart = thread.start_new
+        threadStart = _thread.start_new
         getMidiVol = lambda s: midiOutGetVolume(s)
 
         def outShortMidiMsg(syn, cmd, first, second):
             """Send a MIDI short message to the synthesizer"""
             midiOutShortMsg(syn, cmd | (first << 8) | second << 16)
     else:
-        print "Python version not supported"
+        print("Python version not supported")
         exit(1)
 
 global COUNTS
@@ -81,12 +81,12 @@ def buildScale(chord=0):
     base = [1, 1.5, 2, 2.5, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7]
     k = []
     for i in range(-5 + chord, 0):
-        k += map(lambda x: i * 10 - x, base)
+        k += [i * 10 - x for x in base]
     k += base
     for i in range(1, 5 + chord):
-        k += map(lambda x: i * 10 + x, base)
-    val = range(0, 120)
-    full = dict(zip(k, val))
+        k += [i * 10 + x for x in base]
+    val = list(range(0, 120))
+    full = dict(list(zip(k, val)))
     return full
 
 
@@ -195,8 +195,7 @@ class Player:
         self.beat = val
         self.tpb = 60. / val * 4
         _noteLen = [1, 2, 4, 8, 12, 16, 32, 64]
-        self._noteTimings = dict(zip(_noteLen, map(lambda x: self.tpb / x,
-                                 _noteLen)))
+        self._noteTimings = dict(list(zip(_noteLen, [self.tpb / x for x in _noteLen])))
         _noteLen = [1.1, 2.1, 4.1, 8.1, 16.1, 32.1, 64.1]
         for n in _noteLen:
             self._noteTimings[n] = self.tpb / int(n)
@@ -210,10 +209,10 @@ class Player:
         for i in range(len(chord)):
             if isinstance(chord[i], list):
                 if not (chord[i][0] == 99):
-                    self.playChord(map(lambda j: curScale[j], chord[i]))
+                    self.playChord([curScale[j] for j in chord[i]])
             else:
                 if not (chord[i] == 99):
-                    self.playChord(map(lambda j: curScale[j], [chord[i]]))
+                    self.playChord([curScale[j] for j in [chord[i]]])
             waitTime(self._noteTimings[chord_t[i]])
         COUNTS -= 1
 
@@ -232,7 +231,7 @@ class Player:
         chords and chords_t is the list of timings for chords
         """
         threadStart(self.playAllChord, chordStruct)
-        apply(self.playAllNotes, notesStruct)
+        self.playAllNotes(*notesStruct)
 
     def playPiece2(self, chordStructs):
         """Play a piece of music composed of chordStructs.

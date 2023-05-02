@@ -5,7 +5,7 @@ import player
 mr = player.Player()
 mr.setInstrument('Acoustic grand piano')  # or mr.setInstrument(0)
 
-print 'Let\'s play the lullaby'
+print('Let\'s play the lullaby')
 
 notes = (3, 3, 5, 3, 3, 5, 3, 5, 11, 7, 6, 6, 5, 2, 3, 4, 2, 2, 3, 4, 2, 4,
          7, 6, 5, 7, 11, 1, 1, 11, 6, 4, 5, 3, 1, 4, 5, 6, 5, 1, 1, 11, 6,

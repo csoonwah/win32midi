@@ -7,7 +7,7 @@ mr = player.Player()
 # mr.setChordInstrument('Piano')
 mr.setChordInstrument(1)
 
-print 'Let\'s play the Amazing Grace'
+print('Let\'s play the Amazing Grace')
 
 notes = (5, 6, [3, 11], 13, 12, 11, [5, 13], 12, 13, 12, [6, 11], 6, 11, 6)
 notes_t = (8, 8, 2, 12, 12, 12, 2, 12, 12, 12, 2, 12, 12, 12)

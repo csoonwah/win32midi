@@ -5,7 +5,7 @@ import player
 mr = player.Player()
 mr.setInstrument('Bright acoustic piano')  # or mr.setInstrument(1)
 
-print 'Let\'s play the Aura Lee'
+print('Let\'s play the Aura Lee')
 
 notes = (5, 11, 7, 11, 12, 6, 12, 11, 7, 6, 7, 11, 99, 5, 11, 7, 11, 12, 6, 12,
          11, 7, 6, 7, 11, 99, 13, 13, 13, 13, 13, 13, 13, 12, 11, 12, 13, 99)

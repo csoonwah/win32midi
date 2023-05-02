@@ -28,7 +28,7 @@ tick += [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2]
 
 ticksPerMin = 120
 timePerTick = 60. / ticksPerMin
-print 'Volume', mr.getVolume()
+print('Volume', mr.getVolume())
 l, r = mr.getVolume()
 for n in range(len(star)):
     s = star[n]
@@ -38,16 +38,16 @@ for n in range(len(star)):
     mr.setVolume(int(l * 1.01 ** n), int(r * 1.01 ** n))
 #   print 'Volume', mr.getVolume()
     time.sleep(timePerTick * tick[n])
-print 'Volume', mr.getVolume()
+print('Volume', mr.getVolume())
 # Playing percussion instruments
-print 'Playing with percussion instruments'
+print('Playing with percussion instruments')
 for v in range(1, 127):
     mr.outShortMsg(0x99, 54, v)  # Choosing Tambourine
     # print 'Vel: %d' % v
     time.sleep(0.1)
 # Playing a note with different velocities,v, will produce
 # different volume for the same note
-print 'Start varying velocities, or volume for different notes'
+print('Start varying velocities, or volume for different notes')
 mr.setInstrument(0)
 for v in range(1, 127):
     mr.playNote(60, v, 0)
@@ -58,7 +58,7 @@ for v in range(1, 127):
 # instrument to be on a different channel, which
 # if not specified is channel 0. Musical notes can be played with the second
 # instrument by directing to the same channel
-print 'Playing different instruments together'
+print('Playing different instruments together')
 mr.setInstrument(123, 1)  # Choosing bird tweet on channel #1
 for n in range(len(star)):
     s = star[n]
@@ -71,7 +71,7 @@ for n in range(len(star)):
 # Set the instrument to play the chord to be piano and the max number of
 # notes in the chord to be 4
 # The starting channel for the chord is 1, leaving channel 0 for main melody
-print 'Playing with chords'
+print('Playing with chords')
 mr.setChordInstrument(0, 1, 4)
 # 1 is the starting channel, playing F chord
 mr.playChord([53, 57, 60], 120, 0, 1)
